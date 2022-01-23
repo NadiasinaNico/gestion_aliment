@@ -44,11 +44,11 @@ class InscriptionController extends AbstractController
 
     }
         /**
-     * @Route("/admin/login", name="deconnexion")
+     * @Route("/admin/deconnexion", name="deconnexion")
      */
-    public function deconnexion():Response
+    public function deconnexion()
     {
-        return $this->render('inscription/connexion.html.twig');
+        
 
     }
 }
