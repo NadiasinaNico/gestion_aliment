@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}admin
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{% for message in app.flashes('success', 'danger') %}
+			<div class="row">
+				<div class="col-4">
+
+					<div class="alert alert-success mt-2">
+						{{ message }}
+					</div>
+
+				</div>
+			</div>
+
+		{% endfor %}
+		<div>
+			<a href="{{path('creation_aliment')}}" class="btn btn-primary mt-4">
+				<i class="fa fa-plus"></i>
+				Ajouter</a>
+		</div>
+		<div class="row ">
+
+			<table class="table mt-4">
+				<tr class="table-primary">
+			  	<th>Images</th>
+					<th>Aliment</th>
+					<th>Prix</th>
+					<th>Calories</th>
+					<th>Glucide</th>
+					<th>Lipide</th>
+					<th>Proteine</th>
+					<th>Actions</th>
+				</tr>
+				<tr>
+					{% for aliments in aliment %}
+						<td> 
+						<img src="{{asset('images/aliments/' ~ aliments.image)}}" alt="" style="width:90px">
+						</td>
+						<td>{{ aliments.nom }}</td>
+						<td>{{ aliments.prix }}$</td>
+						<td>{{ aliments.calorie }}</td>
+						<td>{{ aliments.glucide }}</td>
+						<td>{{ aliments.lipide }}</td>
+						<td>{{ aliments.proteine }}</td>
+						<td>
+							<a href="{{path('modification_aliment', {'id':aliments.id })}}" class="btn btn-secondary btn-sm ">
+								<i class="fa fa-edit"></i>
+								Modifier
+							</a>
+							<form action="{{ path('suppression_aliment', {'id': aliments.id }) }}" style="display: inline-block" method="POST">
+								<input type="hidden" name="_method" value="delete">
+								<input type="hidden" name="_token" value="{{csrf_token('SUP')}}">
+								<input type="submit" class="btn btn-danger" value="supprimer">
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+
+{% endblock %}

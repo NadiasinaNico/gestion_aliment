@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+		{% if isModif %}
+			<h4>Modification :
+				{{ aliments.nom }}</h4>
+				{% else %}
+				<h4>Ajout d'un aliment</h4>
+				{% endif %}
+		</div>
+		{{ form_start(form) }}
+    <div class="row">
+		<div class="col-5">
+			{{ form_row(form.nom, {"attr": {"label": "Nom de l'aliment"}})}}
+		<div>{{ form_row(form.prix)}}</div>	
+		<div>{{ form_row(form.imageFile)}}</div>	
+      
+		</div>
+    <div class="col-7">
+			{{ form_row(form.glucide) }}
+			{{ form_row(form.lipide) }}
+			{{ form_row(form.calorie) }}
+			{{ form_row(form.proteine) }}
+			<input class="btn btn-success mt-4" type="submit" value="Enregistrer"> 
+		</div>
+		{{ form_end(form) }}
+	</div>
+  </div>
+{% endblock %}
