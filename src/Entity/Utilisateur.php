@@ -43,6 +43,11 @@ class Utilisateur implements UserInterface
 
     private $verificationPassword;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $roles;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +97,16 @@ class Utilisateur implements UserInterface
     }
     public function getRoles()
     {
-        return ["ROLES_USERS"];
+        return [$this->roles];
+    }
+
+    public function setRoles(?string $roles): self
+    {
+        if ($roles == null){
+            $this->roles = "ROLE_USER";
+        }else{
+            $this->roles = $roles;
+        }
+        return $this;
     }
 }

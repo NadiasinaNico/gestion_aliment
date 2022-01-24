@@ -8,6 +8,16 @@
 		<div class="row">
 			<div class="col-6">
 				<h2>Connexion</h2>
+				{% if error %}
+					<div class="row">
+						<div class="col-8">
+							<div class="alert alert-danger">
+								{{ error.messageKey | trans(error.messagedata, 'security') }}
+							</div>
+						</div>
+					</div>
+
+				{% endif %}
 				<form action="{{path('connexion')}}" method="POST">
 					<div class="form-group">
 						<label for="">Username</label>
@@ -17,7 +27,7 @@
 						<label for="">Password</label>
 						<input type="password" name="_password" class="form-control">
 					</div>
-          <input type="submit" value="s'indentifier" class="btn btn-primary mt-4">
+					<input type="submit" value="s'indentifier" class="btn btn-primary mt-4">
 				</form>
 			</div>
 		</div>

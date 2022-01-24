@@ -7,7 +7,6 @@
 		</title>
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{ asset("bootstrap.min.css")}}">
-			
 			<link rel="stylesheet" href="{{ asset("font/css/all.min.css")}}">
 		{% endblock %}
 		<nav class="navbar navbar-expand-sm bg-dark">
@@ -15,26 +14,34 @@
 				<li class="nav-item">
 					<a class="nav-link" href="#">2NM</a>
 				</li>
+
 				<li class="nav-item">
 					<a class="nav-link" href="{{path('aliment')}}">Aliments</a>
 				</li>
+				{% if is_granted('ROLE_ADMIN') %}
 				<li class="nav-item">
 					<a class="nav-link" href="{{path('administration')}}">Administration</a>
 				</li>
+				{% endif %}
+				{% if not app.user %}
 				<li class="nav-item">
 					<a class="nav-link" href="{{path('inscription')}}">Inscription</a>
 				</li>
 					<li class="nav-item">
 					<a class="nav-link" href="{{path('connexion')}}">Se connecter</a>
 				</li>
+				{% else %}
 					<li class="nav-item">
 					<a class="nav-link" href="{{path('deconnexion')}}">Deconnexion</a>
 				</li>
+				{% endif %}
 
 			</ul>
 		</nav>
 		{% block javascripts %}
-			<link rel="stylesheet" href="{{ asset("bootstrap.bundle.min.js")}}">
+		<script src="{{ asset("bootstrap.min.js")}}"></script>
+		<script src="{{ asset("jquery.min.js")}}"></script>
+		<script src="{{ asset("popper.min.js")}}"></script>
 		{% endblock %}
 	</head>
 	<body>

@@ -9,12 +9,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class InscriptionController extends AbstractController
 {
     /**
-     * @Route("/admin/inscription", name="inscription")
+     * @Route("/inscription", name="inscription")
      */
     public function index(Request $request, ManagerRegistry $managerRegistry, UserPasswordEncoderInterface $encoder): Response
     {
@@ -36,15 +37,19 @@ class InscriptionController extends AbstractController
     }
 
     /**
-     * @Route("/admin/login", name="connexion")
+     * @Route("/inscription/login", name="connexion")
      */
-    public function connexion():Response
+    public function connexion(AuthenticationUtils $util):Response
     {
-        return $this->render('inscription/connexion.html.twig');
+        return $this->render('inscription/connexion.html.twig', [
+            "lastUserName" => $util->getLastUsername(),
+            "error" => $util->getLastAuthenticationError()
+        ]);
+
 
     }
-        /**
-     * @Route("/admin/deconnexion", name="deconnexion")
+    /**
+     * @Route("/deconnexion", name="deconnexion")
      */
     public function deconnexion()
     {
